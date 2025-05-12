@@ -1,0 +1,19 @@
+:root {
+  --main-ttl: 700 3rem "JetBrains Mono", sans-serif;
+  --sec-ttl: 700 2rem "JetBrains Mono", sans-serif;
+  --thd-ttl: 700 1.25rem "JetBrains Mono", sans-serif;
+  --body: 300 1rem "JetBrains Mono", sans-serif;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+}

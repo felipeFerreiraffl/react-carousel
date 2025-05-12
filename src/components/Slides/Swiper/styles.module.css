@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ttl-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.ttl {
+  width: 100%;
+  font: var(--sec-ttl);
+  border-bottom: 2px solid black;
+}
+
+.desc {
+  font: var(--body);
+  color: black;
+}
+
+.carousel {
+}

@@ -8,8 +8,8 @@ import images from "../../../assets/images";
 import styles from "./styles.module.css";
 
 export default function SwiperSlider({ marginTop }) {
-  const prevRef = useRef();
-  const nextRef = useRef();
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
 
   return (
     <div className={styles.container} style={{ marginTop: marginTop }}>
@@ -24,6 +24,17 @@ export default function SwiperSlider({ marginTop }) {
         </p>
       </div>
       <div className={styles.carousel}>
+        {/* 
+          Uso de refs para botões 100% customizáveis
+          Os botões devem ser referenciados antes do Swiper, para não serem renderizados como "null"
+        */}
+        <button ref={prevRef} className={`${styles.btn} ${styles["prev-btn"]}`}>
+          <FaCircleArrowLeft size={80} />
+        </button>
+        <button ref={nextRef} className={`${styles.btn} ${styles["next-btn"]}`}>
+          <FaCircleArrowRight size={80} />
+        </button>
+
         <Swiper
           modules={[Navigation]}
           spaceBetween={16}
@@ -54,13 +65,6 @@ export default function SwiperSlider({ marginTop }) {
             </SwiperSlide>
           ))}
         </Swiper>
-
-        <button className={`${styles.btn} ${styles["prev-btn"]}`} ref={prevRef}>
-          <FaCircleArrowLeft size={80} />
-        </button>
-        <button className={`${styles.btn} ${styles["next-btn"]}`} ref={nextRef}>
-          <FaCircleArrowRight size={80} />
-        </button>
       </div>
     </div>
   );

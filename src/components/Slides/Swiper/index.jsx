@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaCircleArrowLeft, FaCircleArrowRight } from "react-icons/fa6";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "swiper/css";
@@ -10,6 +10,12 @@ import styles from "./styles.module.css";
 export default function SwiperSlider({ marginTop }) {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
+  const [swiperReady, setSwiperReady] = useState(false); // Define quando o Swiper caarrega no DOM
+
+  // Carrega o Swiper, apenas após os botões personalizados serem renderizados
+  useEffect(() => {
+    setSwiperReady(true);
+  }, [swiperReady]);
 
   return (
     <div className={styles.container} style={{ marginTop: marginTop }}>
@@ -29,42 +35,44 @@ export default function SwiperSlider({ marginTop }) {
           Os botões devem ser referenciados antes do Swiper, para não serem renderizados como "null"
         */}
         <button ref={prevRef} className={`${styles.btn} ${styles["prev-btn"]}`}>
-          <FaCircleArrowLeft size={80} />
+          <FaCircleArrowLeft className={styles["btn-i"]} />
         </button>
         <button ref={nextRef} className={`${styles.btn} ${styles["next-btn"]}`}>
-          <FaCircleArrowRight size={80} />
+          <FaCircleArrowRight className={styles["btn-i"]} />
         </button>
 
-        <Swiper
-          modules={[Navigation]}
-          spaceBetween={16}
-          navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
-          breakpoints={{
-            1024: {
-              slidesPerView: 4,
-            },
-            768: {
-              slidesPerView: 3,
-            },
-          }}
-          onBeforeInit={(swiper) => {
-            swiper.params.navigation.prevEl = prevRef.current;
-            swiper.params.navigation.nextEl = nextRef.current;
-          }}
-        >
-          {images.map((img) => (
-            <SwiperSlide key={img}>
-              <LazyLoadImage
-                className={styles.img}
-                src={img.src}
-                alt={img.name}
-                delayMethod="debounce"
-                delayTime={300}
-                effect="blur"
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        {swiperReady && ( // Só renderiza após os botões estarem renderizados
+          <Swiper
+            modules={[Navigation]}
+            spaceBetween={16}
+            navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
+            breakpoints={{
+              1024: {
+                slidesPerView: 4,
+              },
+              768: {
+                slidesPerView: 3,
+              },
+            }}
+            onBeforeInit={(swiper) => {
+              swiper.params.navigation.prevEl = prevRef.current;
+              swiper.params.navigation.nextEl = nextRef.current;
+            }}
+          >
+            {images.map((img) => (
+              <SwiperSlide key={img}>
+                <LazyLoadImage
+                  className={styles.img}
+                  src={img.src}
+                  alt={img.name}
+                  delayMethod="debounce"
+                  delayTime={300}
+                  effect="blur"
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
       </div>
     </div>
   );

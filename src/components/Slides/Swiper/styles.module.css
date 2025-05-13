@@ -31,11 +31,6 @@
   width: 100%;
 }
 
-.swiper-container {
-  width: 100%;
-  min-height: 100%;
-}
-
 .btn {
   position: absolute;
   border: none;
@@ -51,6 +46,10 @@
 
 .next-btn {
   right: 4px;
+}
+
+.btn-i {
+  font-size: 80px;
 }
 
 .img {

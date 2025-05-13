@@ -5,7 +5,7 @@ export default function App() {
     <div className={styles.container}>
       <h1 className={styles.ttl}>Slides com Swiper e Glide</h1>
 
-      <SwiperSlider />
+      <SwiperSlider marginTop={48} />
     </div>
   );
 }
